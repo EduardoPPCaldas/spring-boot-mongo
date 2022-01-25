@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.eduardocaldas.workshopmongo.domain.User;
+import com.eduardocaldas.workshopmongo.dto.UserDTO;
 import com.eduardocaldas.workshopmongo.repositories.UserRepository;
 import com.eduardocaldas.workshopmongo.services.exception.ObjectNotFoundException;
 
@@ -22,5 +23,13 @@ public class UserService {
     public User findById(String id){
         Optional<User> user = repo.findById(id);
         return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto){
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
